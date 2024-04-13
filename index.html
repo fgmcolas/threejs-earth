@@ -1,25 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Robot Bobby Earth</title>
-    <style>
-      body {
-        margin: 0;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Bobby Solar System</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.131/build/three.module.js",
+        "jsm/": "https://cdn.jsdelivr.net/npm/three@0.131/examples/jsm/"
       }
-    </style>
-    <script type="importmap">
-			{
-				"imports": {
-					"three": "https://cdn.jsdelivr.net/npm/three@0.131/build/three.module.js",
-          "jsm/": "https://cdn.jsdelivr.net/npm/three@0.131/examples/jsm/"
-        }
-			}
-		</script>
-  </head>
-  <body>
-    <!-- <script type="module" src="earth.js"></script> -->
-    <script type="module" src="mars.js"></script>
-  </body>
+    }
+  </script>
+</head>
+<body>
+  <button id="loadEarthButton">Load Earth</button>
+  <button id="loadMarsButton">Load Mars</button>
+  <script type="module" id="current-script"></script>
+
+  <script type="module">
+    var currentScriptName = '';
+
+    function loadScript(scriptName) {
+      if (currentScriptName === scriptName) {
+        console.log(scriptName + ' is already loaded');
+        return;
+      }
+
+      var currentScript = document.getElementById('current-script');
+      var newScript = document.createElement('script');
+      newScript.type = 'module';
+      newScript.id = 'current-script';
+
+      newScript.onload = function() {
+        console.log(scriptName + ' loaded successfully');
+        currentScriptName = scriptName;
+      };
+
+      // Remove the current script
+      if (currentScript) {
+        currentScript.parentNode.removeChild(currentScript);
+      }
+
+      // Load the new script
+      newScript.src = scriptName;
+      // Append the new script to the document body
+      document.body.appendChild(newScript);
+    }
+
+    document.getElementById('loadEarthButton').addEventListener('click', function() {
+      console.log('Loading Earth...');
+      loadScript('./earth.js');
+    });
+
+    document.getElementById('loadMarsButton').addEventListener('click', function() {
+      console.log('Loading Mars...');
+      loadScript('./mars.js');
+    });
+  </script>
+</body>
 </html>
