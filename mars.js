@@ -46,7 +46,7 @@ const cloudsMesh = new THREE.Mesh(geometry, cloudsMat);
 cloudsMesh.scale.setScalar(1.003);
 earthGroup.add(cloudsMesh);
 
-const fresnelMat = getFresnelMat();
+const fresnelMat = getFresnelMat({rimHex: 0x0088ff, facingHex: 0x000000, rimColor: new THREE.Color(0.9, 0.3, 0), facingColor: new THREE.Color(0, 0, 0)});
 const glowMesh = new THREE.Mesh(geometry, fresnelMat);
 glowMesh.scale.setScalar(1.01);
 earthGroup.add(glowMesh);
