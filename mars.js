@@ -21,27 +21,25 @@ const detail = 12;
 const loader = new THREE.TextureLoader();
 const geometry = new THREE.IcosahedronGeometry(1, detail);
 const material = new THREE.MeshPhongMaterial({
-  map: loader.load("./textures/00_earthmap1k.jpg"),
-  specularMap: loader.load("./textures/02_earthspec1k.jpg"),
-  bumpMap: loader.load("./textures/01_earthbump1k.jpg"),
+  map: loader.load("./textures/mars/mars_1k_color.jpg"),
+  specularMap: loader.load("./textures/mars/mars_1k_normal.jpg"),
+  bumpMap: loader.load("./textures/mars/mars_1k_topo.jpg"),
   bumpScale: 0.04,
 });
 const earthMesh = new THREE.Mesh(geometry, material);
 earthGroup.add(earthMesh);
 
 const lightsMat = new THREE.MeshBasicMaterial({
-  map: loader.load("./textures/03_earthlights1k.jpg"),
+  map: loader.load("./textures/mars/marsbump1k.jpg"),
   blending: THREE.AdditiveBlending,
 });
 const lightsMesh = new THREE.Mesh(geometry, lightsMat);
 earthGroup.add(lightsMesh);
 
 const cloudsMat = new THREE.MeshStandardMaterial({
-  map: loader.load("./textures/04_earthcloudmap.jpg"),
+  map: loader.load("./textures/mars/marsmap1k.jpg"),
   transparent: true,
-  opacity: 0.8,
-  blending: THREE.AdditiveBlending,
-  alphaMap: loader.load('./textures/05_earthcloudmaptrans.jpg'),
+  opacity: 0.9,
   // alphaTest: 0.3,
 });
 const cloudsMesh = new THREE.Mesh(geometry, cloudsMat);
